@@ -1,0 +1,17 @@
+Source: lentinj-desktop
+Section: unknown
+Priority: optional
+Maintainer: Jamie Lentin <jm@lentin.co.uk>
+Rules-Requires-Root: no
+Build-Depends:
+ debhelper-compat (= 13),
+Standards-Version: 4.7.0
+Homepage: https://github.com/lentinj/repo
+
+Package: lentinj-desktop
+Architecture: any
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends},
+Description: Packages/config for desktop setup
+ Packages/config for desktop setup.

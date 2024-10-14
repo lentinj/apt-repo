@@ -1,0 +1,8 @@
+# https://wiki.debian.org/DebianRepository/SetupWithReprepro
+Origin: apt-repo
+Label: apt-repo
+Codename: sid
+Architectures: source i386 amd64
+Components: main
+Description: apt-repo
+SignWith: <key-id>

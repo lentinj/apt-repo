@@ -1,0 +1,9 @@
+/*.deb
+/*.dsc
+/*.tar.xz
+/*.build
+/*.buildinfo
+/*.changes
+
+/repo/db/
+/repo/pool/
