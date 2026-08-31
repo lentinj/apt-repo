@@ -2,8 +2,9 @@
 # Adapted from https://wiki.debian.org/DebianRepository/SetupWithReprepro
 set -eu
 
-PROJECT="$(awk '/^Origin:/ { print $2 }' ./repo/conf/distributions)"
 WORK_DIR="$1"
+REPO_DIR="${WORK_DIR}/repo"
+PROJECT="$(awk '/^Origin:/ { print $2 }' "${REPO_DIR}/conf/distributions")"
 DEB_DIR="${WORK_DIR}/${PROJECT}-archive-keyring"
 
 mkdir -p "${DEB_DIR}/DEBIAN"

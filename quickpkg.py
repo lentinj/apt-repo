@@ -6,7 +6,7 @@ import re
 import subprocess
 import shutil
 
-def cfg_to_package(cfg_path, base="/tmp/quickpkg"):
+def cfg_to_package(cfg_path, base="/tmp/quickpkg", distribution="stable"):
     config = read_cfg(cfg_path)
     pkg = config[configparser.UNNAMED_SECTION]
 
@@ -20,7 +20,7 @@ def cfg_to_package(cfg_path, base="/tmp/quickpkg"):
         f.write(package_control(pkg))
         f.write("\n")
     with open(os.path.join(deb_path, "changelog"), "w") as f:
-        f.write(package_changelog(pkg))
+        f.write(package_changelog(pkg, distribution=distribution))
         f.write("\n")
     with open(os.path.join(deb_path, "copyright"), "w") as f:
         f.write(package_copyright(pkg))
@@ -52,7 +52,7 @@ def read_cfg(cfg_path):
     config.read(cfg_path)
     pkg = config[configparser.UNNAMED_SECTION]
 
-    authors = [x for x in _git("log", "--pretty=format:'%an <%ae>'", cfg_path) if x]
+    authors = [x for x in _git("log", "--pretty=format:%an <%ae>", cfg_path) if x]
     is_dirty = "\n".join(_git("diff", "--stat", cfg_path)) != ""
     pkg["Path"] = cfg_path
     if "Name" not in pkg:
@@ -60,13 +60,13 @@ def read_cfg(cfg_path):
     if "Version" not in pkg:
         pkg["Version"] = "%d.%d" % (len(authors), 1 if is_dirty else 0)
     if "Author" not in pkg:
-        pkg["Author"] = authors[0] if len(authors) > 1 else "unknown <unknown@example.com>"
+        pkg["Author"] = authors[0] if len(authors) > 0 else "unknown <unknown@example.com>"
     if "Origin" not in pkg:
         pkg["Origin"] = "".join(_git("remote", "get-url", "origin"))
     if "License" not in pkg:
         pkg["License"] = "closed"
     if "Section" not in pkg:
-        pkg["Section"] = "unknown"
+        pkg["Section"] = "misc"
     if "Date" not in pkg:
         pkg["Date"] = _git("log", "--pretty=format:'%as'", cfg_path)[0]
     return config
@@ -103,18 +103,18 @@ Description: {"\n ".join(l.strip() for l in pkg.get("Description", "").split("\n
     """.strip()
 
 
-def package_changelog(pkg):
+def package_changelog(pkg, distribution="stable"):
     # https://www.debian.org/doc/debian-policy/ch-source.html#s-dpkgchangelog
     if pkg["Version"].startswith("0."):
         return f"""
-{pkg["Name"]} ({pkg["Version"]}) UNRELEASED; urgency=medium
+{pkg["Name"]} ({pkg["Version"]}) {distribution}; urgency=medium
 
   Uncommitted package.
 
  -- {pkg["Author"]}  Wed, 24 Sep 2025 11:08:59 +0000
         """.strip()
 
-    changelog = "\n".join(_git("log", "--pretty=format:pkgname (##) UNRELEASED; urgency=medium%n%n  %s%n%n -- %an <%ae>  %aD%n", pkg["Path"]))
+    changelog = "\n".join(_git("log", f"--pretty=format:pkgname (##) {distribution}; urgency=medium%n%n  %s%n%n -- %an <%ae>  %aD%n", pkg["Path"]))
 
     ver = 1
     prevlog = changelog
@@ -167,4 +167,4 @@ def _git(*args):
 
 if __name__ == "__main__":
     import sys
-    cfg_to_package(sys.argv[2], base=sys.argv[1])
+    cfg_to_package(sys.argv[2], base=sys.argv[1], distribution=sys.argv[3])
