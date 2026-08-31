@@ -1,12 +1,14 @@
 #!/bin/sh
 # Adapted from https://wiki.debian.org/DebianRepository/SetupWithReprepro
+set -eu
+
 PROJECT="$(awk '/^Origin:/ { print $2 }' ./repo/conf/distributions)"
 WORK_DIR="$1"
 DEB_DIR="${WORK_DIR}/${PROJECT}-archive-keyring"
 
-mkdir -p "${DEB_DIR}/debian"
+mkdir -p "${DEB_DIR}/DEBIAN"
 # TODO: Flag file to get the author from git?
-cat > "${DEB_DIR}/debian/control" <<EOF
+cat > "${DEB_DIR}/DEBIAN/control" <<EOF
 Package: $PROJECT-archive-keyring
 Version: 1.0.0-1
 Section: misc
@@ -18,19 +20,16 @@ Description: OpenPGP archive certificates of $PROJECT
  contains the archive certificates used for that.
 EOF
 
-# TODO: Export / import key: https://stackoverflow.com/a/61748039
-# https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key
-
 mkdir -p "${DEB_DIR}/usr/share/keyrings"
-gpg --export-options export-minimal --export <fingerprint> \
+gpg --export-options export-minimal --export "${KEY_AUTHOR}" \
     > "${DEB_DIR}/usr/share/keyrings/$PROJECT.pgp"
 
+# NB: Assuming KEY_AUTHOR is set
 mkdir -p "${DEB_DIR}/etc/apt/sources.list.d"
 for REL in $(awk '/^Codename:/ { print $2 }' "${REPO_DIR}/conf/distributions"); do
-  # TODO: Fish out components for this codename
-  # TODO: 
+  COMPONENTS="$(awk '/^Components:/ {  sub("^Components: *", "") ; print }' repo/conf/distributions| head -1)"
   cat >> "${DEB_DIR}/etc/apt/sources.list.d/${PROJECT}.list" <<EOF
-deb [signed-by=/usr/share/keyrings/$PROJECT.pgp] http://<your-domain>/<your-path>/ ${REL} $(awk '/^Components:/ { print $2 $3 $4 $5 $6 $7 }' repo/conf/distributions| head -1)
+deb [signed-by=/usr/share/keyrings/$PROJECT.pgp] http://<your-domain>/<your-path>/ ${REL} ${COMPONENTS}
 EOF
 done
 
