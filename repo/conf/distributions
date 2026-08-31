@@ -5,4 +5,3 @@ Codename: sid
 Architectures: source i386 amd64 arm64
 Components: main
 Description: apt-repo
-SignWith: <key-id>
