@@ -50,14 +50,19 @@ EOF
 reprepro -b "${REPO_DIR}" createsymlinks
 reprepro -b "${REPO_DIR}" export
 
-# Build quickpkg-based packages
-for f in *.cfg; do
-  ./quickpkg.py "${WORK_DIR}" "$f" "${PROJECT_REL}"
-done
-
-# Build package scripts
-for f in ./*.pkg.sh; do
-  "$f" "${WORK_DIR}" "${PROJECT_REL}"
+for f in packages/*; do
+  case $f in
+    *.cfg)
+      ./quickpkg.py "${WORK_DIR}" "$f" "${PROJECT_REL}"
+      ;;
+    *.sh)
+      "$f" "${WORK_DIR}" "${PROJECT_REL}"
+      ;;
+    *)
+      echo "Don't know how to build $f"
+      exit 1
+      ;;
+  esac
 done
 
 handled=""
