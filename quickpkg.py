@@ -114,12 +114,15 @@ def package_changelog(pkg):
  -- {pkg["Author"]}  Wed, 24 Sep 2025 11:08:59 +0000
         """.strip()
 
-    changelog = "".join(_git("log", "--pretty=format:'pkgname (##) UNRELEASED; urgency=medium%n%n  %s%n%n -- %an <%ae>  %aD%n'", pkg["Path"]))
-    i = int(float(pkg["Version"])) + 1
-    def repl(matchobj):
-        i = i - 1
-        return "%s (%d.0)" % (pkg["Name"], i)
-    return re.sub(r'^pkgname \(##\)', repl, changelog)
+    changelog = "\n".join(_git("log", "--pretty=format:pkgname (##) UNRELEASED; urgency=medium%n%n  %s%n%n -- %an <%ae>  %aD%n", pkg["Path"]))
+
+    ver = 1
+    prevlog = changelog
+    while prevlog == changelog:
+        prevlog = changelog
+        changelog = re.sub(r'^pkgname \(##\)', "%s (%d.0)" % (pkg["Name"], ver), changelog, count = 1, flags=re.MULTILINE)
+        ver = ver + 1
+    return changelog
 
 
 def package_copyright(pkg):
@@ -164,4 +167,4 @@ def _git(*args):
 
 if __name__ == "__main__":
     import sys
-    cfg_to_package(sys.argv[2], base=sys.argv[1]):
+    cfg_to_package(sys.argv[2], base=sys.argv[1])
