@@ -95,3 +95,20 @@ for PKG_FILE in "${WORK_DIR}/"*.deb; do
   echo "${handled}" | grep -qw "$(basename "${PKG_FILE}")" && continue
   reprepro -b "${REPO_DIR}" includedeb "${PROJECT_REL}" "${PKG_FILE}"
 done
+
+# Generate index.html
+URL_CONFIG_DEB="$(find _build/repo/ -name 'apt-repo-archive-keyring_*.deb' | sed "sx_build/repox${PUBLISH_URL}x")"
+cat <<EOF > _build/repo/index.html
+<html>
+<body>
+
+<h1>${PROJECT_NAME} repository</h1>
+<p>To install:</p>
+<pre>
+wget ${URL_CONFIG_DEB}
+dpkg -i $(basename ${URL_CONFIG_DEB})
+</pre>
+
+</body>
+</html>
+EOF
