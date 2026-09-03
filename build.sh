@@ -107,6 +107,7 @@ cat <<EOF > _build/repo/index.html
 <pre>
 wget ${URL_CONFIG_DEB}
 dpkg -i $(basename ${URL_CONFIG_DEB})
+apt update
 </pre>
 
 </body>
