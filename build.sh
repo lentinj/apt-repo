@@ -18,6 +18,7 @@ REPO_DIR="${WORK_DIR}/repo"
 mkdir -p -- "${REPO_DIR}"
 
 # Work out PUBLISH_URL from git origin
+git remote -v  # TODO:
 if [ -n "${PUBLISH_URL-}" ]; then
   # Already got one, do nothing
   true
