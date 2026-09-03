@@ -25,6 +25,9 @@ if [ -n "${PUBLISH_URL-}" ]; then
 elif git remote get-url origin | grep -qE '^git@github.com:'; then
   PUBLISH_URL="$(git remote get-url origin | awk 'FS="/" { sub("git@github.com:", "") ; print "https://" $1 ".github.io/" $2 }')"
 fi
+elif git remote get-url origin | grep -qE '^https://github.com'; then
+  PUBLISH_URL="$(git remote get-url origin | awk 'FS="/" { sub("https://github.com/", "") ; print "https://" $1 ".github.io/" $2 }')"
+fi
 export PUBLISH_URL
 
 # Import key into temporary keyring
