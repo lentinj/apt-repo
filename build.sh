@@ -30,9 +30,12 @@ export PUBLISH_URL
 GNUPGHOME="$(mktemp -d)"
 export GNUPGHOME
 if [ -n "${KEY_PRIVKEY}" ]; then
-  echo "${KEY_PRIVKEY}" | gpg --batch --yes --import -
-else
+  printf "%s" "${KEY_PRIVKEY}" | gpg --batch --yes --import -
+elif [ -e "key.priv.asc" ]; then
   echo "${KEY_PASSPHRASE}" | gpg --batch --yes --passphrase-fd 0 --import "key.priv.asc"
+else
+  echo "KEY_PRIVKEY or key.priv.asc not available"
+  exit 1
 fi
 gpg --list-secret-keys
 KEY_AUTHOR="$(gpg --list-secret-keys | awk '/^uid/ { sub("^.*\] *", "") ; print }')"

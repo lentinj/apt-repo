@@ -15,7 +15,7 @@ jobs:
       - name: Build repo
         run: ./build.sh
         env:
-          KEY_PRIVKEY: ${{secrets.KEY_PRIVKEY}}
+          KEY_PRIVKEY: ${{ secrets.KEY_PRIVKEY }}
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
