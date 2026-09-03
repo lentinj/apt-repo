@@ -18,15 +18,17 @@ REPO_DIR="${WORK_DIR}/repo"
 mkdir -p -- "${REPO_DIR}"
 
 # Work out PUBLISH_URL from git origin
-git remote -v  # TODO:
 if [ -n "${PUBLISH_URL-}" ]; then
   # Already got one, do nothing
   true
 elif git remote get-url origin | grep -qE '^git@github.com:'; then
   PUBLISH_URL="$(git remote get-url origin | awk 'FS="/" { sub("git@github.com:", "") ; print "https://" $1 ".github.io/" $2 }')"
-fi
 elif git remote get-url origin | grep -qE '^https://github.com'; then
   PUBLISH_URL="$(git remote get-url origin | awk 'FS="/" { sub("https://github.com/", "") ; print "https://" $1 ".github.io/" $2 }')"
+else
+  echo "Cannot convert git origin to a publish URL"
+  git remote -v
+  exit 1
 fi
 export PUBLISH_URL
 
