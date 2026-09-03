@@ -1,0 +1,6 @@
+Archive: unstable
+Component: main
+Origin: apt-repo
+Label: apt-repo
+Architecture: arm64
+Description: apt-repo repository at https://lentinj.github.io/apt-repo

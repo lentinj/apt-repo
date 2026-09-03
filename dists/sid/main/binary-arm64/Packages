@@ -1,0 +1,31 @@
+Package: apt-repo-archive-keyring
+Version: 1.0.0-1
+Architecture: all
+Maintainer: Jamie Lentin <jm@lentin.co.uk>
+Priority: optional
+Section: misc
+Filename: pool/main/a/apt-repo-archive-keyring/apt-repo-archive-keyring_1.0.0-1_all.deb
+Size: 1970
+SHA256: 7f8cbce6ea80f42137b886349cbd455c6eb9557864702dd02a4f1add2bb7a34c
+SHA1: 3c5ff063a1bcc5dad55fd01063460bbaacb97cce
+MD5sum: cbcb27840b11b3c8d6fc6358429a31c9
+Description: OpenPGP archive certificates of apt-repo
+ apt-repo digitally signs its Release files. This package
+ contains the archive certificates used for that.
+
+Package: tune-powersupply
+Version: 1.0
+Architecture: all
+Maintainer: Jamie Lentin <jm@lentin.co.uk>
+Installed-Size: 12
+Depends: udev
+Priority: optional
+Section: misc
+Filename: pool/main/t/tune-powersupply/tune-powersupply_1.0_all.deb
+Size: 1376
+SHA256: 9f31dbf276e1d9e637f268236c6c233ed9d3eeee933bc7801867e653ff8478df
+SHA1: 85c5a3bc1e782fc874f498e98195c45e70d669c8
+MD5sum: dd3ce3feace5b5f4a16c11a10a81e933
+Description: Tune processor based on power supply state
+ Maximum performance on battery power
+
