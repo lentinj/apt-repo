@@ -9,6 +9,8 @@ name: Publish repository to gh-pages
 jobs:
   documentation:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - run: sudo apt install build-essential dpkg-dev dh-make reprepro
       - uses: actions/setup-python@v7
