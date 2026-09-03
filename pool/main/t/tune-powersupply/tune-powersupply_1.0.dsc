@@ -10,8 +10,8 @@ Build-Depends: debhelper-compat (= 13)
 Package-List:
  tune-powersupply deb misc optional arch=all
 Checksums-Sha1:
- 82bd10c833c646fbd708dbd101e34a4f8c6f4836 1028 tune-powersupply_1.0.tar.xz
+ a472521c72f2f6f5ba2e50b81f0538d172ae9493 1036 tune-powersupply_1.0.tar.xz
 Checksums-Sha256:
- 6b6e7d295eadd97bf49d767f0c07a60334af444021015f08a2cfec237d40b53c 1028 tune-powersupply_1.0.tar.xz
+ 9c4ff049ee81ce9ea36cb92db1948e1b19fdf806153c42339b51295d5892b9c8 1036 tune-powersupply_1.0.tar.xz
 Files:
- 3e28dd25cfb2539840cdabd9a8054da1 1028 tune-powersupply_1.0.tar.xz
+ 0f63f69ba7db08fa3c71ca6668c6bc72 1036 tune-powersupply_1.0.tar.xz
