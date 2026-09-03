@@ -33,7 +33,7 @@ Types: deb
 URIs: ${PUBLISH_URL}
 Suites: ${PROJECT_REL}
 Components: ${COMPONENTS}
-Signed-By: signed-by=/usr/share/keyrings/$PROJECT.pgp
+Signed-By: /usr/share/keyrings/$PROJECT.pgp
 EOF
 
 dpkg-deb --root-owner-group --build "${WORK_DIR}/${PROJECT}-archive-keyring"
