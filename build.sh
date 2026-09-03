@@ -44,7 +44,7 @@ else
   exit 1
 fi
 gpg --list-secret-keys
-KEY_AUTHOR="$(gpg --list-secret-keys | awk '/^uid/ { sub("^.*\] *", "") ; print }')"
+KEY_AUTHOR="$(gpg --list-secret-keys | awk '/^uid/ { sub("^.*] *", "") ; print }')"
 KEY_EMAIL="$(echo "${KEY_AUTHOR}"| sed 's/.*<// ; s/>.*//')"
 [ -z "${KEY_AUTHOR-}" ] && { echo "No GPG key imported"; exit 1; }
 export KEY_AUTHOR KEY_EMAIL
@@ -72,6 +72,7 @@ for f in packages/*; do
   echo ================================== "$f" ===
   case $f in
     *.cfg)
+      python3 -v  # TODO:
       ./quickpkg.py "${WORK_DIR}" "$f" "${PROJECT_REL}"
       ;;
     *.sh)
