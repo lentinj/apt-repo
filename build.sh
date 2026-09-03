@@ -29,7 +29,7 @@ export PUBLISH_URL
 # Import key into temporary keyring
 GNUPGHOME="$(mktemp -d)"
 export GNUPGHOME
-if [ -n "${KEY_PRIVKEY}" ]; then
+if [ -n "${KEY_PRIVKEY-}" ]; then
   printf "%s" "${KEY_PRIVKEY}" | gpg --batch --yes --import -
 elif [ -e "key.priv.asc" ]; then
   echo "${KEY_PASSPHRASE}" | gpg --batch --yes --passphrase-fd 0 --import "key.priv.asc"

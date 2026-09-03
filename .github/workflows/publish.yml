@@ -10,6 +10,8 @@ jobs:
   documentation:
     runs-on: ubuntu-latest
     steps:
+      - run: sudo apt install dh-make reprepro
+
       - uses: actions/checkout@v3
 
       - name: Build repo
