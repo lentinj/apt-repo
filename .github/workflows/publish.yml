@@ -1,0 +1,24 @@
+on:
+  push:
+    tags:
+      - main
+  workflow_dispatch:
+
+name: Publish repository to gh-pages
+
+jobs:
+  documentation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build repo
+        run: ./build.sh
+        env:
+          KEY_PRIVKEY: ${{secrets.KEY_PRIVKEY}}
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_build/repo/

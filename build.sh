@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eu
 # Set:
-# - key.priv.asc: ASCII-armored private key
+# - KEY_PRIVKEY: Conent of ASCII-armored private key
 # - KEY_PASSPHRASE: passphrase protecting key, default ""
 # - PUBLISH_URL: (optional) URL repo will be accessible from
 
@@ -29,7 +29,11 @@ export PUBLISH_URL
 # Import key into temporary keyring
 GNUPGHOME="$(mktemp -d)"
 export GNUPGHOME
-echo "${KEY_PASSPHRASE}" | gpg --batch --yes --passphrase-fd 0 --import "key.priv.asc"
+if [ -n "${KEY_PRIVKEY}" ]; then
+  echo "${KEY_PRIVKEY}" | gpg --batch --yes --import -
+else
+  echo "${KEY_PASSPHRASE}" | gpg --batch --yes --passphrase-fd 0 --import "key.priv.asc"
+fi
 gpg --list-secret-keys
 KEY_AUTHOR="$(gpg --list-secret-keys | awk '/^uid/ { sub("^.*\] *", "") ; print }')"
 KEY_EMAIL="$(echo "${KEY_AUTHOR}"| sed 's/.*<// ; s/>.*//')"
