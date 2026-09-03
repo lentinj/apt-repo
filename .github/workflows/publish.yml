@@ -10,7 +10,7 @@ jobs:
   documentation:
     runs-on: ubuntu-latest
     steps:
-      - run: sudo apt install dh-make reprepro
+      - run: sudo apt install dpkg-dev dh-make reprepro
       - uses: actions/setup-python@v7
         with:
           python-version: '3.13' 
