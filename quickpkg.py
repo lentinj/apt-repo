@@ -33,10 +33,11 @@ def cfg_to_package(cfg_path, base="/tmp/quickpkg", distribution="stable"):
     os.chmod(os.path.join(deb_path, "rules"), 0o755)
 
     with open(os.path.join(deb_path, "%s.install" % pkg["Name"]), "w") as dh_install_f:
-        for source_path, dest_path, content in package_files(config):
+        for source_path, dest_path, content, chmod_mode in package_files(config):
             os.makedirs(os.path.join(package_path, os.path.dirname(source_path)), exist_ok=True)
             with open(os.path.join(package_path, source_path), "w") as f:
                 f.write(content)
+            os.chmod(os.path.join(package_path, source_path), chmod_mode)
             dh_install_f.write("%s %s\n" % (source_path, os.path.dirname(dest_path)))
 
     subprocess.run((
@@ -116,8 +117,8 @@ def package_changelog(pkg, distribution="stable"):
     changelog = "\n".join(_git("log", f"--pretty=format:pkgname (##) {distribution}; urgency=medium%n%n  %s%n%n -- %an <%ae>  %aD%n", pkg["Path"]))
 
     ver = 1
-    prevlog = changelog
-    while prevlog == changelog:
+    prevlog = ""
+    while prevlog != changelog:
         prevlog = changelog
         changelog = re.sub(r'^pkgname \(##\)', "%s (%d.0)" % (pkg["Name"], ver), changelog, count = 1, flags=re.MULTILINE)
         ver = ver + 1
@@ -125,7 +126,6 @@ def package_changelog(pkg, distribution="stable"):
 
 
 def package_copyright(pkg):
-    license_text = "TODO: Where does the license_text come from?"
     return f"""
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Source: <url://{pkg["Origin"]}>
@@ -155,7 +155,11 @@ def package_files(config):
         source_path = re.sub("^/", "", n)
         if 'content' in config[n]:
             content = "".join(re.split(r'^[|] ?', config[n]['content'], flags=re.MULTILINE)[1:])
-        yield source_path, dest_path, content
+        if config[n].get('executable', False) or dest_path.startswith("/bin/") or dest_path.startswith("/usr/bin/") or dest_path.startswith("/sbin/") or dest_path.startswith("/usr/sbin/"):
+            chmod_mode = 0o775
+        else:
+            chmod_mode = 0o664
+        yield source_path, dest_path, content, chmod_mode
 
 
 def _git(*args):
