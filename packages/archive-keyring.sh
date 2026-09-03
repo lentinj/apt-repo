@@ -21,17 +21,16 @@ Description: OpenPGP archive certificates of $PROJECT
  contains the archive certificates used for that.
 EOF
 
+# NB: Assuming KEY_AUTHOR is set
 mkdir -p "${DEB_DIR}/usr/share/keyrings"
 gpg --export-options export-minimal --export "${KEY_AUTHOR}" \
     > "${DEB_DIR}/usr/share/keyrings/$PROJECT.pgp"
 
-# NB: Assuming KEY_AUTHOR is set
 mkdir -p "${DEB_DIR}/etc/apt/sources.list.d"
-for REL in $(awk '/^Codename:/ { print $2 }' "${REPO_DIR}/conf/distributions"); do
-  COMPONENTS="$(awk '/^Components:/ {  sub("^Components: *", "") ; print }' repo/conf/distributions| head -1)"
-  cat >> "${DEB_DIR}/etc/apt/sources.list.d/${PROJECT}.list" <<EOF
-deb [signed-by=/usr/share/keyrings/$PROJECT.pgp] http://<your-domain>/<your-path>/ ${REL} ${COMPONENTS}
+
+COMPONENTS="$(awk '/^Components:/ {  sub("^Components: *", "") ; print }' "${REPO_DIR}/conf/distributions" | head -1)"
+cat >> "${DEB_DIR}/etc/apt/sources.list.d/${PROJECT}.list" <<EOF
+deb [signed-by=/usr/share/keyrings/$PROJECT.pgp] ${PUBLISH_URL} ${PROJECT_REL} ${COMPONENTS}
 EOF
-done
 
 dpkg-deb --root-owner-group --build "${WORK_DIR}/${PROJECT}-archive-keyring"

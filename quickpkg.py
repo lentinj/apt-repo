@@ -136,8 +136,7 @@ Upstream-Contact: {pkg["Author"]}
 Files:
  *
 Copyright: {pkg["Date"][0:4]} {pkg["Author"]}
-License: {pkg["License"]}
- {"\n ".join(license_text.split("\n"))}
+License: {"\n  ".join(pkg["License"].split("\n"))}
     """.strip()
 
 

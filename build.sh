@@ -6,10 +6,11 @@ set -eu
 # - PUBLISH_URL: (optional) URL repo will be accessible from
 
 WORK_DIR="./_build"
-PROJECT_NAME="$(basename $(dirname $(readlink -f "$0")))"
+PROJECT_NAME="$(basename "$(dirname "$(readlink -f "$0")")")"
 PROJECT_REL="sid"
 PROJECT_SUITE="unstable"
 KEY_PASSPHRASE="${KEY_PASSPHRASE-}"
+export WORK_DIR PROJECT_NAME PROJECT_REL PROJECT_SUITE
 
 # Make temporary repo dir so we can modify configs
 [ -d "${WORK_DIR}" ] && rm -r "${WORK_DIR}"
@@ -19,17 +20,21 @@ mkdir -p -- "${REPO_DIR}"
 # Work out PUBLISH_URL from git origin
 if [ -n "${PUBLISH_URL-}" ]; then
   # Already got one, do nothing
-  export PUBLISH_URL
+  true
 elif git remote get-url origin | grep -qE '^git@github.com:'; then
-  export PUBLISH_URL="$(git remote get-url origin | awk 'FS="/" { sub("git@github.com:", "") ; print "https://" $1 ".github.io/" $2 }')"
+  PUBLISH_URL="$(git remote get-url origin | awk 'FS="/" { sub("git@github.com:", "") ; print "https://" $1 ".github.io/" $2 }')"
 fi
+export PUBLISH_URL
 
 # Import key into temporary keyring
-export GNUPGHOME="$(mktemp -d)"
+GNUPGHOME="$(mktemp -d)"
+export GNUPGHOME
 echo "${KEY_PASSPHRASE}" | gpg --batch --yes --passphrase-fd 0 --import "key.priv.asc"
-export KEY_AUTHOR="$(gpg --list-secret-keys | awk '/^uid/ { sub("^.*\] *", "") ; print }')"
-export KEY_EMAIL="$(echo "${KEY_AUTHOR}"| sed 's/.*<// ; s/>.*//')"
+gpg --list-secret-keys
+KEY_AUTHOR="$(gpg --list-secret-keys | awk '/^uid/ { sub("^.*\] *", "") ; print }')"
+KEY_EMAIL="$(echo "${KEY_AUTHOR}"| sed 's/.*<// ; s/>.*//')"
 [ -z "${KEY_AUTHOR-}" ] && { echo "No GPG key imported"; exit 1; }
+export KEY_AUTHOR KEY_EMAIL
 
 # Build rerepro config
 mkdir -p "${REPO_DIR}/conf"
@@ -51,6 +56,7 @@ reprepro -b "${REPO_DIR}" createsymlinks
 reprepro -b "${REPO_DIR}" export
 
 for f in packages/*; do
+  echo ================================== "$f" ===
   case $f in
     *.cfg)
       ./quickpkg.py "${WORK_DIR}" "$f" "${PROJECT_REL}"
@@ -64,6 +70,7 @@ for f in packages/*; do
       ;;
   esac
 done
+echo ==================================
 
 handled=""
 for PKG_FILE in "${WORK_DIR}/"*.changes; do
