@@ -43,8 +43,7 @@ def cfg_to_package(cfg_path, base="/tmp/quickpkg", distribution="stable"):
         "/usr/bin/dpkg-buildpackage",
         "-us",
         "-uc",
-        package_path,
-    ), check=True)
+    ), cwd=package_path, check=True)
 
 
 def read_cfg(cfg_path):

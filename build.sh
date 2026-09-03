@@ -72,7 +72,6 @@ for f in packages/*; do
   echo ================================== "$f" ===
   case $f in
     *.cfg)
-      /usr/bin/dpkg-buildpackage --help  # TODO
       python3 ./quickpkg.py "${WORK_DIR}" "$f" "${PROJECT_REL}"
       ;;
     *.sh)
