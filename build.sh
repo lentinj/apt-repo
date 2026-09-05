@@ -133,7 +133,7 @@ cat <<EOF > _build/repo/index.html
 <p>To install:</p>
 <pre>
 wget ${URL_CONFIG_DEB}
-dpkg -i $(basename ${URL_CONFIG_DEB})
+dpkg -i $(basename "${URL_CONFIG_DEB}")
 apt update
 </pre>
 
