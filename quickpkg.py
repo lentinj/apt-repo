@@ -43,9 +43,9 @@ def cfg_to_package(cfg_path, base="/tmp/quickpkg", distribution="stable"):
             os.chmod(os.path.join(package_path, source_path), chmod_mode)
             dh_install_f.write("%s %s\n" % (source_path, os.path.dirname(dest_path)))
 
-    cmd = ["/usr/bin/dpkg-buildpackage"]
+    cmd = ["/usr/bin/dpkg-buildpackage", "-uc"]  # NB: Changelog will have git author, not KEY_AUTHOR
     if not os.environ.get("KEY_AUTHOR"):
-        cmd.extend(["-us", "-uc"])
+        cmd.extend(["-us"])
     subprocess.run(cmd, cwd=package_path, check=True)
 
 
