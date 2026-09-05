@@ -42,8 +42,8 @@ def cfg_to_package(cfg_path, base="/tmp/quickpkg", distribution="stable"):
 
     subprocess.run((
         "/usr/bin/dpkg-buildpackage",
-        "-us",
-        "-uc",
+        "" if os.environ.get("KEY_AUTHOR") else "-us",
+        "" if os.environ.get("KEY_AUTHOR") else "-uc",
     ), cwd=package_path, check=True)
 
 
@@ -52,7 +52,10 @@ def read_cfg(cfg_path):
     config.read(cfg_path)
     pkg = config[configparser.UNNAMED_SECTION]
 
-    authors = [x for x in _git("log", "--pretty=format:%an <%ae>", cfg_path) if x]
+    if os.environ.get("KEY_AUTHOR"):
+        authors = [os.environ["KEY_AUTHOR"]]
+    else:
+        authors = [x for x in _git("log", "--pretty=format:%an <%ae>", cfg_path) if x]
     is_dirty = "\n".join(_git("diff", "--stat", cfg_path)) != ""
     pkg["Path"] = cfg_path
     if "Name" not in pkg:
