@@ -1,0 +1,6 @@
+Archive: stable
+Component: main
+Origin: apt-repo
+Label: apt-repo
+Architecture: i386
+Description: apt-repo repository at https://lentinj.github.io/apt-repo

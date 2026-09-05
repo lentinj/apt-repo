@@ -2,8 +2,8 @@
 # https://manpages.debian.org/trixie/reprepro/reprepro.1.en.html#conf/distributions
 Origin: apt-repo
 Label: apt-repo
-Codename: sid
-Suite: unstable
+Codename: any
+Suite: stable
 Architectures: source i386 amd64 arm64
 Components: main
 Description: apt-repo repository at https://lentinj.github.io/apt-repo

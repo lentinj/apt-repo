@@ -1,0 +1,66 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Origin: apt-repo
+Label: apt-repo
+Suite: stable
+Codename: any
+Date: Sat, 05 Sep 2026 14:44:34 UTC
+Architectures: i386 amd64 arm64
+Components: main
+Description: apt-repo repository at https://lentinj.github.io/apt-repo
+MD5Sum:
+ 0412e51328afc48ed1e33180dbded528 1115 main/binary-i386/Packages
+ 3eb69d2e48a627f3b2c567781cd9c9bf 599 main/binary-i386/Packages.gz
+ af8c3482977b733414d52520e30294d3 155 main/binary-i386/Release
+ 0412e51328afc48ed1e33180dbded528 1115 main/binary-amd64/Packages
+ 3eb69d2e48a627f3b2c567781cd9c9bf 599 main/binary-amd64/Packages.gz
+ 8e41c6753d89359c4083f254da27c461 156 main/binary-amd64/Release
+ 0412e51328afc48ed1e33180dbded528 1115 main/binary-arm64/Packages
+ 3eb69d2e48a627f3b2c567781cd9c9bf 599 main/binary-arm64/Packages.gz
+ e55b8b5a052e8ee90f17c2b8e963179c 156 main/binary-arm64/Release
+ 7cdbe8ea3bef9ae9aecd5eb5ec34b717 1894 main/source/Sources
+ 3e4c7a026ddd545270ccaa0102f4ff81 768 main/source/Sources.gz
+ 9556fcb905b2cb011e940ed927a6c696 157 main/source/Release
+SHA1:
+ 5ebdfb60f8d3e63e05043f3ae100f4fff5d14edf 1115 main/binary-i386/Packages
+ f65ab2bec8878eac962fa2d60361e1248239f70b 599 main/binary-i386/Packages.gz
+ 2f6c77f28a0139f7f03c70d1bad4357528f13c33 155 main/binary-i386/Release
+ 5ebdfb60f8d3e63e05043f3ae100f4fff5d14edf 1115 main/binary-amd64/Packages
+ f65ab2bec8878eac962fa2d60361e1248239f70b 599 main/binary-amd64/Packages.gz
+ a7d58e1e96c17fcd11cf720935ef28452949debc 156 main/binary-amd64/Release
+ 5ebdfb60f8d3e63e05043f3ae100f4fff5d14edf 1115 main/binary-arm64/Packages
+ f65ab2bec8878eac962fa2d60361e1248239f70b 599 main/binary-arm64/Packages.gz
+ 201fcdc2e26da5de508270bf9e92b9ae51c39925 156 main/binary-arm64/Release
+ 761a1bc5dd1e0f57153a2e41516f04820d2dec50 1894 main/source/Sources
+ a5d014d8316b05cd3c225364bb044ec89e9f4955 768 main/source/Sources.gz
+ 27f7cf57aeb1c075c3d05af66e2c24836789d102 157 main/source/Release
+SHA256:
+ d620ab93caf33a03fccfdcf66179e55cc915ff67f701e6c7c16fbe6a2cd23f13 1115 main/binary-i386/Packages
+ 6e5688cd72c57f0331bbbe64433ef77ac6d7318c3dcfeddfcff804d9c453a333 599 main/binary-i386/Packages.gz
+ 676dcdaac31e8c3ae02f486596a28a51176df1b10bf160ed535c4cf7bd8614c8 155 main/binary-i386/Release
+ d620ab93caf33a03fccfdcf66179e55cc915ff67f701e6c7c16fbe6a2cd23f13 1115 main/binary-amd64/Packages
+ 6e5688cd72c57f0331bbbe64433ef77ac6d7318c3dcfeddfcff804d9c453a333 599 main/binary-amd64/Packages.gz
+ 1e844288dd21625f1eedc87955d4bf41b8b8d016dfa6953ee39688833cfb11af 156 main/binary-amd64/Release
+ d620ab93caf33a03fccfdcf66179e55cc915ff67f701e6c7c16fbe6a2cd23f13 1115 main/binary-arm64/Packages
+ 6e5688cd72c57f0331bbbe64433ef77ac6d7318c3dcfeddfcff804d9c453a333 599 main/binary-arm64/Packages.gz
+ e652268cd8173b2242e17d3d3fe7887ed85872af70817b3908a0dc9ce4398fad 156 main/binary-arm64/Release
+ c69540ece483315de78abc7495fd103d5e9f496ce87cb6a7244460ee75ff486c 1894 main/source/Sources
+ f77b8334a4f4ac260abca7808acbf0c8ff444df0aff2bde1fd1ea9a77994d6a3 768 main/source/Sources.gz
+ 76e390a2b24b9fb47b55efd74891519646b6d6410db88c64fe71030d4984c7a0 157 main/source/Release
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEcfMw4BYrWZ4FIxObTvC+vHBhho4FAmqcKtIACgkQTvC+vHBh
+ho4QDQ//dv4dOgtmOZm8lSvKfOMYDJ8EN90DNGt1b1yW3hsXqzhdV/GMZmrlM2C7
+YaHDSxHQnnuVbeTPjIWWfcLxv7Sn4E7TLUkm/OEnLve3qMqFjRsq9WoFMgv/0m07
+M65VNM+GJa0ZBSxuoYOeQyBSMmQhk2WKfDG33kJMeRA6VFdRZpEyA9vtE4Bb/k9e
+8I4bNCFsXgt0OjCBYVjyKkuhkkNxk4QjJiYnqFBgFOnTqakB+mq4BoGBUIeGPMpp
+OIO/K7A2t5hmuyjH+W6BEyE6eWTBBfZs2uucqoU6CrKdHW5EevwUTm2PQ+HbYVNC
+JmKEz4aX9aeV0otDUOe0qTiz7BENUghdXEeSSPwkfniDcOd7vOQyruRA+2UQ/tz4
+9HO5eA2H60Qoiv7m5CjJj/BujuZpuxH3/ubQDxPOcNIj9/OWTEi6qd9QlpOg1f/y
+W0/qNWwn9SblWZ0HOWmoRReeqtgIVj6uk2ToT6YaVl4e7yVAw9xb3AbdpOt8aiiA
+8ysHro+CqyHEhMl/0iN48j4z3IJ+zCkVWP4tuLBdm2AElPdhoAucI5bmsMUjLidO
+0GIzgz35WzqLac1FwtEOJiMosAHaQm4Bdl+rKBHlH0kzxbRYqcMBjUKT0Jg7nQDt
+rjap/yI/BZ7VSylUnmJjXMSzMAXhW+jYXfSpsfC4jnR6kTmEl/Q=
+=IWT3
+-----END PGP SIGNATURE-----
