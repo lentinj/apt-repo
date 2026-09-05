@@ -162,7 +162,7 @@ def package_files(config):
         dest_path = n
         source_path = re.sub("^/", "", n)
         if 'content' in config[n]:
-            content = ("".join(re.split(r'^[|] ?', config[n]['content'], flags=re.MULTILINE)[1:])).encode("utf8")
+            content = ("".join(re.split(r'^[|] ?', config[n]['content'], flags=re.MULTILINE)[1:]) + "\n").encode("utf8")
         elif 'content_hex' in config[n]:
             content = bytes.fromhex("".join(re.split(r'^[|] ?', config[n]['content_hex'], flags=re.MULTILINE)[1:]).replace("\n", ""))
         if config[n].get('executable', False) or dest_path.startswith("/bin/") or dest_path.startswith("/usr/bin/") or dest_path.startswith("/sbin/") or dest_path.startswith("/usr/sbin/"):
