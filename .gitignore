@@ -8,3 +8,5 @@
 /key.priv.asc
 
 /_build/
+
+/packages/apt-repo-archive-keyring.cfg

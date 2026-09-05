@@ -12,7 +12,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - run: sudo apt install build-essential dpkg-dev dh-make reprepro
+      - run: sudo apt install build-essential dpkg-dev dh-make reprepro xxd
       - uses: actions/setup-python@v7
         with:
           python-version: '3.13' 

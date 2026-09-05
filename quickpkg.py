@@ -20,7 +20,10 @@ def cfg_to_package(cfg_path, base="/tmp/quickpkg", distribution="stable"):
         f.write(package_control(pkg))
         f.write("\n")
     with open(os.path.join(deb_path, "changelog"), "w") as f:
-        f.write(package_changelog(pkg, distribution=distribution))
+        if "changelog" in config:
+            f.write("".join(re.split(r'^[|] ?', config["changelog"]["content"], flags=re.MULTILINE)[1:]))
+        else:
+            f.write(package_changelog(pkg, distribution=distribution))
         f.write("\n")
     with open(os.path.join(deb_path, "copyright"), "w") as f:
         f.write(package_copyright(pkg))
@@ -35,7 +38,7 @@ def cfg_to_package(cfg_path, base="/tmp/quickpkg", distribution="stable"):
     with open(os.path.join(deb_path, "%s.install" % pkg["Name"]), "w") as dh_install_f:
         for source_path, dest_path, content, chmod_mode in package_files(config):
             os.makedirs(os.path.join(package_path, os.path.dirname(source_path)), exist_ok=True)
-            with open(os.path.join(package_path, source_path), "w") as f:
+            with open(os.path.join(package_path, source_path), "wb") as f:
                 f.write(content)
             os.chmod(os.path.join(package_path, source_path), chmod_mode)
             dh_install_f.write("%s %s\n" % (source_path, os.path.dirname(dest_path)))
@@ -152,12 +155,14 @@ def package_rules(pkg):
 
 def package_files(config):
     for n in config.sections():
-        if n == configparser.UNNAMED_SECTION:
+        if n == configparser.UNNAMED_SECTION or not n.startswith("/"):
             continue
         dest_path = n
         source_path = re.sub("^/", "", n)
         if 'content' in config[n]:
-            content = "".join(re.split(r'^[|] ?', config[n]['content'], flags=re.MULTILINE)[1:])
+            content = ("".join(re.split(r'^[|] ?', config[n]['content'], flags=re.MULTILINE)[1:])).encode("utf8")
+        elif 'content_hex' in config[n]:
+            content = bytes.fromhex("".join(re.split(r'^[|] ?', config[n]['content_hex'], flags=re.MULTILINE)[1:]).replace("\n", ""))
         if config[n].get('executable', False) or dest_path.startswith("/bin/") or dest_path.startswith("/usr/bin/") or dest_path.startswith("/sbin/") or dest_path.startswith("/usr/sbin/"):
             chmod_mode = 0o775
         else:
