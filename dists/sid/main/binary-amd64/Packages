@@ -1,15 +1,15 @@
 Package: apt-repo-archive-keyring
-Version: 1
+Version: 2
 Architecture: all
 Maintainer: Jamie Lentin <jm__aptrepo@lentin.co.uk>
 Installed-Size: 16
 Priority: optional
 Section: misc
-Filename: pool/main/a/apt-repo-archive-keyring/apt-repo-archive-keyring_1_all.deb
-Size: 2606
-SHA256: 2a4bdae08c6fbbca70a4a5e834e07fc459672f38e2801fc44639edfe607f116c
-SHA1: 0504132bda267e368368dba930d240b11ddc3e18
-MD5sum: 4f0fb5dfba8954183c9a3df8e831fe8e
+Filename: pool/main/a/apt-repo-archive-keyring/apt-repo-archive-keyring_2_all.deb
+Size: 2604
+SHA256: 4f6e2e9c0034dbfb3b9ac19eb485cca9b3233bf56cd483021a955229e17a8531
+SHA1: ad7d9ec3dec5f08ff475d1680d2a065cc1de81d2
+MD5sum: b3e3795ec29f09796ad9a0d6e9f002a0
 Description: OpenPGP archive certificates of apt-repo
  apt-repo digitally signs its Release files. This package
  contains the archive certificates used for that.
@@ -23,10 +23,10 @@ Depends: udev
 Priority: optional
 Section: misc
 Filename: pool/main/t/tune-powersupply/tune-powersupply_1.0_all.deb
-Size: 1378
-SHA256: a88d23b4269efc59cb0b8947b97b172ac9b2a90289c6b665373971f75d9f5431
-SHA1: 410373b93ea1868392e89a5e099e05b9d2928163
-MD5sum: 670b5551c07c0634b12e426187eafa17
+Size: 1364
+SHA256: 6ec96ae206806baeb093fe60792ea02cc43052941c3e67c02b06084195cbace0
+SHA1: 25721ecc7e86ea95ae86442d5940ecca831b8c9c
+MD5sum: d41eecf7b530ccb77c84e650274009bb
 Description: Tune processor based on power supply state
  Maximum performance on battery power, balanced on battery
 
