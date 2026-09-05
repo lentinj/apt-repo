@@ -10,7 +10,7 @@ export GNUPGHOME="$(mktemp -d)"
 
 cat <<EOF | gpg --batch --generate-key -
      Key-Type: RSA
-     Key-Length: 4098
+     Key-Length: 4096
      Name-Real: ${KEY_USER}
      Name-Email: ${KEY_EMAIL}
      Expire-Date: 0
