@@ -11,7 +11,6 @@ PROJECT_REL="sid"
 PROJECT_SUITE="unstable"
 KEY_PASSPHRASE="${KEY_PASSPHRASE-}"
 KEY_VERSION="${KEY_VERSION-1}"
-export WORK_DIR PROJECT_NAME PROJECT_REL PROJECT_SUITE
 
 # Make temporary repo dir so we can modify configs
 [ -d "${WORK_DIR}" ] && rm -r "${WORK_DIR}"
@@ -31,7 +30,6 @@ else
   git remote -v
   exit 1
 fi
-export PUBLISH_URL
 
 # Import key into temporary keyring
 GNUPGHOME="$(mktemp -d)"
@@ -126,7 +124,7 @@ for PKG_FILE in "${WORK_DIR}/"*.deb; do
 done
 
 # Generate index.html
-URL_CONFIG_DEB="$(find _build/repo/ -name 'apt-repo-archive-keyring_*.deb' | sed "sx_build/repox${PUBLISH_URL}x")"
+URL_CONFIG_DEB="$(find _build/repo/ -name "${PROJECT_NAME}-archive-keyring_*.deb" | sed "sx_build/repox${PUBLISH_URL}x")"
 cat <<EOF > _build/repo/index.html
 <html>
 <body>
