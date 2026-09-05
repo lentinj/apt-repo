@@ -7,8 +7,8 @@ set -eu
 
 WORK_DIR="./_build"
 PROJECT_NAME="$(basename "$(dirname "$(readlink -f "$0")")")"
-PROJECT_REL="sid"
-PROJECT_SUITE="unstable"
+PROJECT_REL="any"
+PROJECT_SUITE="stable"
 KEY_PASSPHRASE="${KEY_PASSPHRASE-}"
 KEY_VERSION="${KEY_VERSION-1}"
 
