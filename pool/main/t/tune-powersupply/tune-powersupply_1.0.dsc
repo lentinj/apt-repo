@@ -13,26 +13,26 @@ Build-Depends: debhelper-compat (= 13)
 Package-List:
  tune-powersupply deb misc optional arch=all
 Checksums-Sha1:
- 1bf55685b0f59d0f6c6fb0c1ae0ba34c5508799f 1052 tune-powersupply_1.0.tar.xz
+ 7748bbabac1d85cda4ebc04712eb223e013a278b 1072 tune-powersupply_1.0.tar.xz
 Checksums-Sha256:
- c5073ae6543313c3727b6a0f82dcff334184a0552422f953616d96c831ef21e4 1052 tune-powersupply_1.0.tar.xz
+ e828b40dcfc5d7570b6917a5a094e393e15bd43ed04843d0ccf9e414cf98dc90 1072 tune-powersupply_1.0.tar.xz
 Files:
- fddcfe43cdf2684791c83cef5f1f656f 1052 tune-powersupply_1.0.tar.xz
+ f36fe99d011d69f568bab8b3f7d00e2d 1072 tune-powersupply_1.0.tar.xz
 
 -----BEGIN PGP SIGNATURE-----
 
-iQJNBAEBCgA3FiEEcfMw4BYrWZ4FIxObTvC+vHBhho4FAmqcKtIZHGptX19hcHRy
-ZXBvQGxlbnRpbi5jby51awAKCRBO8L68cGGGjn2XD/9N87NcTzG3fO2JvirrMaJI
-HGOT7+tU3D19udJX2IbGqyB5XP6x7WCqC8yyUxwHt7NV75B9jQTjZsnR532DEwqq
-vI7Q5H+3oMoX2/RUqaFukOBEzhl7RVZkK7yD4Ac5PdX/e6xugsT4bgHIZuYDcpSg
-I96RwJba0olkYvhFJhxLP38qmuHQWRV8DFF1nj93lJyRh30ehNBr0NCGEGoFNOMI
-GiGC65TDRDM7eNdS5PVV7i7J22NZL8Zo+r7d5fOgAbzQ8rrE7F3nuKllrsH2JS1m
-/S0XjJ/A8n4BrjDIgOvtz6kwns8LS0as3SQU7Fr5tJqqtoD/dfvEwS/5lqw1VO2z
-BUS7I0wwi/32OeD8qMuM1c8ZQ14ySZ27/5j7zx7v4rp1MAs7yeWomysl1xihbpjc
-zMNa3MAeR8OZ8TmLRcGI3IX/m86GKdHMvk0HgiodYhvrC6CbX7OtZ112Jos2grJX
-Qzb+ioCxqzs1Lp5qWZ0272Y8haHIX9gNaM2Osln/C3GNUqz5UmrBMwErhZBMqtb/
-ezI4wzoSzh1Xs0pLaSXxO1DmWnj6oJO8Jx0izh6mti0Q287mObng5leFbQeheV8G
-Rk+GmBdmNgbXoUKkQR1n+VMYoedP0nFar6yDQTGlDSwnIx2r60cnh5m92fe1WUDq
-cctccDnVgFDugMuG18QoAA==
-=ny6V
+iQJNBAEBCgA3FiEEcfMw4BYrWZ4FIxObTvC+vHBhho4FAmqjGV8ZHGptX19hcHRy
+ZXBvQGxlbnRpbi5jby51awAKCRBO8L68cGGGjsB1D/9+PTEhLURzLjl0KM0jurBl
+1gxMILSwLZh56ApYnKXKhCJBEA09mjZoWsM4CbJQlAJ7+iFNLh9w6ZH7fmtSgbxx
+pDZziJv61Y6HoX9w5VHuzMy1LUHOfWxIntF4S0gKPsqAPwxYspwOxzxxTZF5FvN9
+j+wuX1uyiJUwlNRmTFn9rd/zQhvBOp7XehRVGE9aFLGt5La12q27JEs6I/gSERFR
+aLWorufmCL7U6nNx70rsmOV+wjPwemGEhC7adNlJOVhHg/bhHyDazilJWUecc2A/
+St9Yw7MflHjVwxe1KesWFXn/VYmt8wNek+yV1OiOlF4sE26dbYoIzIFpus+e7lvF
+ddJ5A5abseK+FhqIo6eVq8uqzzK8Wr2ZGoYMlWqxJ56CIIPy0tDsCuD/Vod2iP6p
+WAUXB8v+465vCbd7/f3pDlcTpEbWM7dGoJLT+AxEzFZYI1ErI61xxQn8W/kuAjvB
+CK+5H91bV21+jStvu8LxohaY5TqgbaKntNAQ5GC3CyXmjP66gN1k1nLS1RdylskY
+GhApGXr9zAJ37UTs190XbKQx3V2U9fkihfOqPQ+fvVJcVwF7bwD6f3anI3JWN3WR
+1owHo5pGn/10Lv/09MorYNKpjiC688GR9hSP6cHLvf/qAX3n3FXLt3qmR2xW/QWZ
+ZcGWZH+CFiqW7jfUfDQq2A==
+=QaHs
 -----END PGP SIGNATURE-----
