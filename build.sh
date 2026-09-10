@@ -71,7 +71,7 @@ Description = OpenPGP archive certificates of ${PROJECT_NAME}
     ${PROJECT_NAME} digitally signs its Release files. This package
     contains the archive certificates used for that.
 
-[changelog]
+[debian/changelog]
 content =
  | ${PROJECT_NAME}-archive-keyring (${KEY_VERSION}) ${PROJECT_REL}; urgency=medium
  |

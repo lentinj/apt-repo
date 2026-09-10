@@ -1,4 +1,9 @@
 #!/usr/bin/python3
+# https://python-debian-team.pages.debian.net/python-debian/html/api/debian.changelog.html
+# https://pypi.org/project/python-debian/
+# https://www.debian.org/doc/debian-policy/ch-controlfields.html
+# https://www.debian.org/doc/manuals/debmake-doc/ch06.en.html#control
+# https://manpages.debian.org/testing/debhelper/dh_systemd_enable.1.en.html
 import configparser
 import os
 import os.path
@@ -16,15 +21,24 @@ def cfg_to_package(cfg_path, base="/tmp/quickpkg", distribution="stable"):
 
     deb_path = os.path.join(package_path, "debian")
     os.makedirs(os.path.join(deb_path, "source"))
+
+    # Write all files (install & debian/) out to package directory
+    with open(os.path.join(deb_path, "%s.install" % pkg["Name"]), "w") as dh_install_f:
+        for source_path, dest_path, content, chmod_mode in package_files(config):
+            os.makedirs(os.path.join(package_path, os.path.dirname(source_path)), exist_ok=True)
+            with open(os.path.join(package_path, source_path), "wb") as f:
+                f.write(content)
+            os.chmod(os.path.join(package_path, source_path), chmod_mode)
+            if not dest_path.startswith(deb_path):
+                dh_install_f.write("%s %s\n" % (source_path, os.path.dirname(dest_path)))
+
     with open(os.path.join(deb_path, "control"), "w") as f:
         f.write(package_control(pkg))
         f.write("\n")
-    with open(os.path.join(deb_path, "changelog"), "w") as f:
-        if "changelog" in config:
-            f.write("".join(re.split(r'^[|] ?', config["changelog"]["content"], flags=re.MULTILINE)[1:]))
-        else:
+    if not os.path.exists(os.path.join(deb_path, "changelog")):
+        with open(os.path.join(deb_path, "changelog"), "w") as f:
             f.write(package_changelog(pkg, distribution=distribution))
-        f.write("\n")
+            f.write("\n")
     with open(os.path.join(deb_path, "copyright"), "w") as f:
         f.write(package_copyright(pkg))
         f.write("\n")
@@ -34,14 +48,6 @@ def cfg_to_package(cfg_path, base="/tmp/quickpkg", distribution="stable"):
     with open(os.path.join(deb_path, "source", "format"), "w") as f:
         f.write("3.0 (native)\n")
     os.chmod(os.path.join(deb_path, "rules"), 0o755)
-
-    with open(os.path.join(deb_path, "%s.install" % pkg["Name"]), "w") as dh_install_f:
-        for source_path, dest_path, content, chmod_mode in package_files(config):
-            os.makedirs(os.path.join(package_path, os.path.dirname(source_path)), exist_ok=True)
-            with open(os.path.join(package_path, source_path), "wb") as f:
-                f.write(content)
-            os.chmod(os.path.join(package_path, source_path), chmod_mode)
-            dh_install_f.write("%s %s\n" % (source_path, os.path.dirname(dest_path)))
 
     cmd = ["/usr/bin/dpkg-buildpackage"]
     if not os.environ.get("KEY_AUTHOR"):
@@ -157,7 +163,7 @@ def package_rules(pkg):
 
 def package_files(config):
     for n in config.sections():
-        if n == configparser.UNNAMED_SECTION or not n.startswith("/"):
+        if n == configparser.UNNAMED_SECTION or not (n.startswith("/") or n.startswith("debian/")):
             continue
         dest_path = n
         source_path = re.sub("^/", "", n)
